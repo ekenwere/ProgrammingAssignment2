@@ -30,20 +30,18 @@ makeCacheMatrix <- function(x = matrix()) {
 
 ## Write a short comment describing this function
 
-# This miserable function will accept input "x" for some reason.
+# This miserable function will accept input "x".
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
   
+  # See if there's a cached inversion. If there is, you found Nemo!
   localInversion <- x$retrieveInverse()
   if(!is.null(localInversion)) {
     message("Found Nemo.")
-#    cat("x:",x,"\nand\ny:",y,"\n")
     return(localInversion)
   } else {
-#    makeCacheMatrix(x)
     message("Finding Nemo.")
     
-    # Get the bloody matrix.
+    # Solve and store the bloody matrix.
     localMatrix <- x$retrieveMatrix()
     localCache <- solve(localMatrix,...)
     x$storeInverse(localCache)
