@@ -48,17 +48,26 @@ makeCacheMatrix <- function(x=matrix()) {
 test2 <- makeCacheMatrix()
 
 cacheSolve <- function(...) {
+  
+  # Save the input as a matrix.
   input <- as.matrix(...)
-#  message("To begin...")
+  
+  # Check to see if we've already solved a matrix inversion. If yes, there will be an object called "bogon" in the
+  # Global envt. If it doesn't exist, run code from makeCacheMatrix to perform the inversion.
   if (!exists("bogon")) {
     message("This matrix is new to us.")
     test2$d(input)
-  } else if (identical(input,bogon)) {
+
+    # If there's a "bogon" object AND it's from analysis of the same matrix, return the cached inversion.
+    } else if (identical(input,bogon)) {
     message("We've solved this inversion before.")
     StoredSolution
-  } else {
+
+    # If there's a "bogon" object but it doesn't match the current input, call makeCacheMatrix to solve the new
+    # matrix and store the new inversion.
+    } else {
     message("We've solved an inversion, but it's different from what we have in store.")
     test2$d(input)
   }
 }
-#  z$d()
+
